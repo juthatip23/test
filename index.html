@@ -9,15 +9,16 @@
 
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #f2f2f2; /* พื้นหลังสีเทาอ่อนช่วยดันให้รูปเด่น */
             margin: 0;
             padding: 0;
             font-family: 'Prompt', sans-serif;
             color: #333;
         }
 
+        /* ขยายกล่องข้อความให้กว้างขึ้น เพื่อรองรับจอใหญ่/ไอแพดแนวนอน */
         .container {
-            max-width: 1000px; /* ขยายกรอบเว็บให้กว้างขึ้น */
+            max-width: 1200px; 
             margin: 0 auto;
             padding: 40px 20px;
             background-color: #ffffff;
@@ -30,69 +31,67 @@
             color: #2c3e50;
             text-transform: uppercase;
             letter-spacing: 1.5px;
+            font-size: 2rem;
         }
 
+        /* --- ตั้งค่าพื้นฐานรูปภาพ --- */
         img {
             display: block;
             border-radius: 4px;
-            background-color: #f0f0f0;
+            background-color: #e0e0e0; /* สีพื้นหลังระหว่างรอรูป */
+            margin: 0 auto; /* จัดกึ่งกลาง */
             
-            /* Animation Setup */
+            /* Animation */
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        /* Class เมื่อโหลดเสร็จ */
         img.loaded {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* --- ส่วน Resume (A4 แนวตั้ง) --- */
+        /* --- ส่วน Resume (แก้ไขให้ใหญ่ขึ้น) --- */
         .resume-wrapper {
             display: flex;
             justify-content: center;
             margin-bottom: 60px;
-            background-color: #fafafa; /* พื้นหลังรองรับถ้ารูปเล็ก */
-            padding: 20px;
-            border-radius: 8px;
+            width: 100%;
         }
 
         .resume-img {
-            /* ปรับใหม่: ไม่บังคับ width 100% ถ้าภาพเล็กกว่ากรอบ */
-            width: auto; 
-            max-width: 100%; /* แต่ไม่ให้ล้นจอ */
-            
-            /* จำกัดความกว้างสูงสุดให้ใหญ่ขึ้นเพื่อให้เห็นชัด */
-            /* ถ้าภาพต้นฉบับชัดพอ มันจะขยายได้ถึง 800px */
-            max-height: 1200px; 
-            
-            /* เทคนิคลดความเบลอของภาพ */
-            image-rendering: -webkit-optimize-contrast;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 100%;           /* ยืดเต็มพื้นที่ wrapper */
+            max-width: 1000px;     /* จำกัดความกว้างสูงสุดไว้ที่ 1000px (ใหญ่มากแล้วสำหรับ A4) */
+            height: auto;          /* รักษาอัตราส่วน */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* เงาเข้มขึ้นนิดนึงให้ตัดกับพื้นหลัง */
         }
 
         /* --- ส่วนผลงาน (แนวนอน) --- */
         .work-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
+            align-items: center; /* จัดให้รูปอยู่ตรงกลางเสมอ */
         }
 
         .work-img {
-            width: 100%;
+            width: 100%; /* เต็มความกว้าง container */
+            max-width: 100%; 
             height: auto;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        /* --- มือถือ --- */
-        @media (max-width: 600px) {
-            .container { padding: 15px; }
-            .resume-wrapper { padding: 0; background: none; }
-            .resume-img { 
-                width: 100%; /* ในมือถือให้เต็มจอเสมอ */
-                box-shadow: none; 
+        /* --- รองรับมือถือและแท็บเล็ต --- */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 10px; /* ลดขอบข้างลงให้รูปเต็มจอมากขึ้น */
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .resume-img {
+                max-width: 100%; /* ในมือถือให้เต็มจอไปเลย */
             }
         }
     </style>
@@ -103,10 +102,10 @@
         <h1>Feam's Portfolio</h1>
 
         <div class="resume-wrapper">
-            <img src="Resume.pdf" alt="Resume" class="resume-img" onload="this.classList.add('loaded')">
+            <img src="Resume.jpg" alt="Resume" class="resume-img" onload="this.classList.add('loaded')">
         </div>
 
-        <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 40px;">
+        <hr style="border: 0; border-top: 2px solid #f0f0f0; margin-bottom: 50px;">
 
         <div class="work-wrapper">
             <img src="Feam - 1.jpg" loading="lazy" decoding="async" class="work-img">
@@ -127,29 +126,41 @@
             <img src="Feam - 16.jpg" loading="lazy" decoding="async" class="work-img">
         </div>
         
-        <p style="text-align: center; color: #aaa; margin-top: 60px; font-size: 0.8rem;">
+        <p style="text-align: center; color: #aaa; margin-top: 80px; padding-bottom: 20px;">
             End of Portfolio
         </p>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Lazy Load Animation Logic
+            // Lazy Load Logic
             const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        if (img.complete) {
-                            img.classList.add('loaded');
-                        } else {
-                            img.onload = () => img.classList.add('loaded');
+            
+            // เช็คว่า Browser รองรับ IntersectionObserver หรือไม่
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            
+                            // ฟังก์ชันแสดงรูป
+                            const showImage = () => img.classList.add('loaded');
+
+                            if (img.complete) {
+                                showImage();
+                            } else {
+                                img.onload = showImage;
+                            }
+                            observer.unobserve(img);
                         }
-                        observer.unobserve(img);
-                    }
-                });
-            });
-            lazyImages.forEach(img => imageObserver.observe(img));
+                    });
+                }, { threshold: 0.1 }); // ให้เห็นรูป 10% ก่อนค่อยโหลด
+
+                lazyImages.forEach(img => imageObserver.observe(img));
+            } else {
+                // Fallback สำหรับ Browser เก่าๆ ให้แสดงรูปเลย
+                lazyImages.forEach(img => img.classList.add('loaded'));
+            }
         });
     </script>
 
