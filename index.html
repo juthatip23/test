@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feam Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ตั้งค่าพื้นฐาน */
+        body {
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            font-family: 'Prompt', sans-serif;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #ffffff;
+            min-height: 100vh; /* ให้สูงเต็มจอ */
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* --- สไตล์รูปภาพทั่วไป --- */
+        img {
+            display: block;
+            border-radius: 8px;
+            /* สีเทาๆ รอไว้ก่อนรูปมา จะได้ไม่ดูโล่ง */
+            background-color: #eee; 
+            
+            /* Animation: เริ่มต้นจางๆ และเลื่อนลงมานิดนึง */
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        /* Class นี้จะถูกเติมโดย JS เมื่อรูปโหลดเสร็จและเลื่อนมาถึง */
+        img.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- ส่วน Resume (A4 แนวตั้ง) --- */
+        .resume-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .resume-img {
+            width: 100%;
+            max-width: 500px; /* จำกัดความกว้างสำหรับ A4 */
+            height: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* เงาให้ดูลอย */
+        }
+
+        /* --- ส่วนผลงาน (แนวนอน) --- */
+        .work-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 30px; /* ระยะห่างระหว่างรูป */
+        }
+
+        .work-img {
+            width: 100%; /* เต็มความกว้าง */
+            height: auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        /* --- มือถือ --- */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+            }
+            .resume-img {
+                max-width: 100%;
+            }
+            .work-wrapper {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Feam's Portfolio</h1>
+
+        <div class="resume-wrapper">
+            <img src="Resume.jpg" alt="Resume" class="resume-img" onload="this.classList.add('loaded')">
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #eaeaea; margin-bottom: 50px;">
+
+        <div class="work-wrapper">
+            <img src="Feam - 1.jpg" loading="lazy" decoding="async" alt="Work 1" class="work-img">
+            <img src="Feam - 2.jpg" loading="lazy" decoding="async" alt="Work 2" class="work-img">
+            <img src="Feam - 3.jpg" loading="lazy" decoding="async" alt="Work 3" class="work-img">
+            <img src="Feam - 4.jpg" loading="lazy" decoding="async" alt="Work 4" class="work-img">
+            <img src="Feam - 5.jpg" loading="lazy" decoding="async" alt="Work 5" class="work-img">
+            <img src="Feam - 6.jpg" loading="lazy" decoding="async" alt="Work 6" class="work-img">
+            <img src="Feam - 7.jpg" loading="lazy" decoding="async" alt="Work 7" class="work-img">
+            <img src="Feam - 8.jpg" loading="lazy" decoding="async" alt="Work 8" class="work-img">
+            <img src="Feam - 9.jpg" loading="lazy" decoding="async" alt="Work 9" class="work-img">
+            <img src="Feam - 10.jpg" loading="lazy" decoding="async" alt="Work 10" class="work-img">
+            <img src="Feam - 11.jpg" loading="lazy" decoding="async" alt="Work 11" class="work-img">
+            <img src="Feam - 12.jpg" loading="lazy" decoding="async" alt="Work 12" class="work-img">
+            <img src="Feam - 13.jpg" loading="lazy" decoding="async" alt="Work 13" class="work-img">
+            <img src="Feam - 14.jpg" loading="lazy" decoding="async" alt="Work 14" class="work-img">
+            <img src="Feam - 15.jpg" loading="lazy" decoding="async" alt="Work 15" class="work-img">
+            <img src="Feam - 16.jpg" loading="lazy" decoding="async" alt="Work 16" class="work-img">
+        </div>
+
+        <p style="text-align: center; color: #aaa; margin-top: 60px; font-size: 0.9rem;">
+            End of Portfolio
+        </p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // ดึงรูปภาพทั้งหมดที่มี loading="lazy"
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        // ถ้าภาพโหลดเสร็จแล้ว ให้แสดงผลเลย
+                        if (img.complete) {
+                            img.classList.add('loaded');
+                        } else {
+                            // ถ้ายังไม่เสร็จ รอโหลดเสร็จค่อยแสดง
+                            img.onload = () => {
+                                img.classList.add('loaded');
+                            };
+                        }
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            lazyImages.forEach(img => {
+                imageObserver.observe(img);
+            });
+            
+            // ส่วน Resume บังคับให้แสดงเลย (เผื่อ onload ใน HTML ไม่ทำงาน)
+            const resume = document.querySelector('.resume-img');
+            if(resume.complete) resume.classList.add('loaded');
+        });
+    </script>
+
+</body>
+</html>
