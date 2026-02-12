@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;500&display=swap" rel="stylesheet">
 
     <style>
-        /* ตั้งค่าพื้นฐาน */
         body {
             background-color: #f8f9fa;
             margin: 0;
@@ -18,11 +17,11 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px; /* ขยายกรอบเว็บให้กว้างขึ้น */
             margin: 0 auto;
             padding: 40px 20px;
             background-color: #ffffff;
-            min-height: 100vh; /* ให้สูงเต็มจอ */
+            min-height: 100vh;
         }
 
         h1 {
@@ -33,20 +32,18 @@
             letter-spacing: 1.5px;
         }
 
-        /* --- สไตล์รูปภาพทั่วไป --- */
         img {
             display: block;
-            border-radius: 8px;
-            /* สีเทาๆ รอไว้ก่อนรูปมา จะได้ไม่ดูโล่ง */
-            background-color: #eee; 
+            border-radius: 4px;
+            background-color: #f0f0f0;
             
-            /* Animation: เริ่มต้นจางๆ และเลื่อนลงมานิดนึง */
+            /* Animation Setup */
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
 
-        /* Class นี้จะถูกเติมโดย JS เมื่อรูปโหลดเสร็จและเลื่อนมาถึง */
+        /* Class เมื่อโหลดเสร็จ */
         img.loaded {
             opacity: 1;
             transform: translateY(0);
@@ -57,38 +54,45 @@
             display: flex;
             justify-content: center;
             margin-bottom: 60px;
+            background-color: #fafafa; /* พื้นหลังรองรับถ้ารูปเล็ก */
+            padding: 20px;
+            border-radius: 8px;
         }
 
         .resume-img {
-            width: 100%;
-            max-width: 500px; /* จำกัดความกว้างสำหรับ A4 */
-            height: auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* เงาให้ดูลอย */
+            /* ปรับใหม่: ไม่บังคับ width 100% ถ้าภาพเล็กกว่ากรอบ */
+            width: auto; 
+            max-width: 100%; /* แต่ไม่ให้ล้นจอ */
+            
+            /* จำกัดความกว้างสูงสุดให้ใหญ่ขึ้นเพื่อให้เห็นชัด */
+            /* ถ้าภาพต้นฉบับชัดพอ มันจะขยายได้ถึง 800px */
+            max-height: 1200px; 
+            
+            /* เทคนิคลดความเบลอของภาพ */
+            image-rendering: -webkit-optimize-contrast;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         /* --- ส่วนผลงาน (แนวนอน) --- */
         .work-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 30px; /* ระยะห่างระหว่างรูป */
+            gap: 20px;
         }
 
         .work-img {
-            width: 100%; /* เต็มความกว้าง */
+            width: 100%;
             height: auto;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         /* --- มือถือ --- */
         @media (max-width: 600px) {
-            .container {
-                padding: 20px 15px;
-            }
-            .resume-img {
-                max-width: 100%;
-            }
-            .work-wrapper {
-                gap: 20px;
+            .container { padding: 15px; }
+            .resume-wrapper { padding: 0; background: none; }
+            .resume-img { 
+                width: 100%; /* ในมือถือให้เต็มจอเสมอ */
+                box-shadow: none; 
             }
         }
     </style>
@@ -102,62 +106,50 @@
             <img src="Resume.jpg" alt="Resume" class="resume-img" onload="this.classList.add('loaded')">
         </div>
 
-        <hr style="border: 0; border-top: 1px solid #eaeaea; margin-bottom: 50px;">
+        <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 40px;">
 
         <div class="work-wrapper">
-            <img src="Feam - 1.jpg" loading="lazy" decoding="async" alt="Work 1" class="work-img">
-            <img src="Feam - 2.jpg" loading="lazy" decoding="async" alt="Work 2" class="work-img">
-            <img src="Feam - 3.jpg" loading="lazy" decoding="async" alt="Work 3" class="work-img">
-            <img src="Feam - 4.jpg" loading="lazy" decoding="async" alt="Work 4" class="work-img">
-            <img src="Feam - 5.jpg" loading="lazy" decoding="async" alt="Work 5" class="work-img">
-            <img src="Feam - 6.jpg" loading="lazy" decoding="async" alt="Work 6" class="work-img">
-            <img src="Feam - 7.jpg" loading="lazy" decoding="async" alt="Work 7" class="work-img">
-            <img src="Feam - 8.jpg" loading="lazy" decoding="async" alt="Work 8" class="work-img">
-            <img src="Feam - 9.jpg" loading="lazy" decoding="async" alt="Work 9" class="work-img">
-            <img src="Feam - 10.jpg" loading="lazy" decoding="async" alt="Work 10" class="work-img">
-            <img src="Feam - 11.jpg" loading="lazy" decoding="async" alt="Work 11" class="work-img">
-            <img src="Feam - 12.jpg" loading="lazy" decoding="async" alt="Work 12" class="work-img">
-            <img src="Feam - 13.jpg" loading="lazy" decoding="async" alt="Work 13" class="work-img">
-            <img src="Feam - 14.jpg" loading="lazy" decoding="async" alt="Work 14" class="work-img">
-            <img src="Feam - 15.jpg" loading="lazy" decoding="async" alt="Work 15" class="work-img">
-            <img src="Feam - 16.jpg" loading="lazy" decoding="async" alt="Work 16" class="work-img">
+            <img src="Feam - 1.jpg" loading="lazy" decoding="async" class="work-img">
+            <img src="Feam - 2.jpg" loading="lazy" decoding="async" class="work-img">
+            <img src="Feam - 3.jpg" loading="lazy" decoding="async" class="work-img">
+            <img src="Feam - 4.jpg" loading="lazy" decoding="async" class="work-img">
+            <img src="Feam - 5.jpg" loading="lazy" decoding="async" class="work-img">
+            <img src="Feam - 6.jpg" loading="lazy" decoding="async" class="work-img">
+            <img src="Feam - 7.jpg" loading="lazy" decoding="async" class="work-img">
+            <img src="Feam - 8.jpg" loading="lazy" decoding="async" class="work-img">
+            <img src="Feam - 9.jpg" loading="lazy" decoding="async" class="work-img">
+            <img src="Feam - 10.jpg" loading="lazy" decoding="async" class="work-img">
+            <img src="Feam - 11.jpg" loading="lazy" decoding="async" class="work-img">
+            <img src="Feam - 12.jpg" loading="lazy" decoding="async" class="work-img">
+            <img src="Feam - 13.jpg" loading="lazy" decoding="async" class="work-img">
+            <img src="Feam - 14.jpg" loading="lazy" decoding="async" class="work-img">
+            <img src="Feam - 15.jpg" loading="lazy" decoding="async" class="work-img">
+            <img src="Feam - 16.jpg" loading="lazy" decoding="async" class="work-img">
         </div>
-
-        <p style="text-align: center; color: #aaa; margin-top: 60px; font-size: 0.9rem;">
+        
+        <p style="text-align: center; color: #aaa; margin-top: 60px; font-size: 0.8rem;">
             End of Portfolio
         </p>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // ดึงรูปภาพทั้งหมดที่มี loading="lazy"
+            // Lazy Load Animation Logic
             const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-
             const imageObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const img = entry.target;
-                        // ถ้าภาพโหลดเสร็จแล้ว ให้แสดงผลเลย
                         if (img.complete) {
                             img.classList.add('loaded');
                         } else {
-                            // ถ้ายังไม่เสร็จ รอโหลดเสร็จค่อยแสดง
-                            img.onload = () => {
-                                img.classList.add('loaded');
-                            };
+                            img.onload = () => img.classList.add('loaded');
                         }
                         observer.unobserve(img);
                     }
                 });
             });
-
-            lazyImages.forEach(img => {
-                imageObserver.observe(img);
-            });
-            
-            // ส่วน Resume บังคับให้แสดงเลย (เผื่อ onload ใน HTML ไม่ทำงาน)
-            const resume = document.querySelector('.resume-img');
-            if(resume.complete) resume.classList.add('loaded');
+            lazyImages.forEach(img => imageObserver.observe(img));
         });
     </script>
 
